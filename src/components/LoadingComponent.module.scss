@@ -1,0 +1,25 @@
+.loading_component_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .spin {
+        width: 40px;
+        height: 40px;
+        border: solid 3px #ffa500;
+        border-radius: 50%;
+        border-left-color: transparent;
+        animation-name: spin;
+        animation-duration: .5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'AlteHaasGroteskBold';
+  src: url('../fonts/AlteHaasGroteskBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AlteHaasGroteskRegular';
+  src: url('../fonts/AlteHaasGroteskRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'AlteHaasGroteskRegular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input {
+  font-family: 'AlteHaasGroteskRegular', sans-serif;
+}
