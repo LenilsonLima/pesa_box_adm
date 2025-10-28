@@ -21,6 +21,7 @@
         font-weight: bold;
         transition: .3s ease-in-out;
         overflow: hidden;
+        max-height: 80px;
 
         &:hover {
             opacity: .7;
