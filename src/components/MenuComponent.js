@@ -10,20 +10,27 @@ const MenuComponent = ({ setOpenCloseMenu }) => {
         localStorage.clear();
         navigation('/login');
     }
+    const dev = () => {
+        alert('Função em desenvolvimento.')
+    }
     return (
         <div className={styles.container_menu}>
             <div className={styles.body_menu}>
                 <div className={styles.area_menu}>
                     <div className={styles.menu}>
                         <div className={styles.area_close}>
+                            <span>MENU</span>
                             <MdOutlineClose onClick={() => setOpenCloseMenu(false)} />
                         </div>
                         <ul>
-                            <li>
+                            <li onClick={dev}>
                                 <span>Perfil</span>
                                 <RiUserSettingsLine />
                             </li>
-                            <li>
+                            <li onClick={() => {
+                                navigation('/');
+                                setOpenCloseMenu(false);
+                            }}>
                                 <span>Usuários</span>
                                 <LuUsers />
                             </li>

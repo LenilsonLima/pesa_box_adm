@@ -26,15 +26,20 @@
                 display: flex;
                 flex-direction: column;
                 background-color: #fff;
-                padding: 20px;
-                gap: 30px;
 
                 .area_close {
                     display: flex;
-                    justify-content: flex-end;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 15px 10px;
+
+                    span {
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
 
                     svg {
-                        font-size: 30px;
+                        font-size: 20px;
                         cursor: pointer;
                         color: #000;
                     }
@@ -44,21 +49,17 @@
                     list-style: none;
                     display: flex;
                     flex-direction: column;
-                    gap: 5px;
 
                     li {
-                        background-color: #f8f8f8;
-                        padding: 10px;
-                        border-radius: 3px;
+                        padding: 15px 10px;
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         cursor: pointer;
-                        border: solid 1px transparent;
-                        transition: .3s ease-in-out;
+                        border-top: solid 1px #f2f2f2;
 
                         &:hover {
-                            border-color: #ece8e8;
+                            opacity: .7;
                         }
 
                         span {
