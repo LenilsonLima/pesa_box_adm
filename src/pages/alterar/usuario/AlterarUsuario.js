@@ -69,6 +69,7 @@ const AlterarUsuario = () => {
     }, []);
 
     const desativarUsuario = async () => {
+            setOpenCloseModalConfirmar(false);
         const token = localStorage.getItem('@pesabox_adm_token');
         const id = localStorage.getItem('@pesabox_adm_id');
         const requestOptions = {
