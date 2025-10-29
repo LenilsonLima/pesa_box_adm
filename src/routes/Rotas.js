@@ -6,6 +6,7 @@ import RotasPublicas from "./RotasPublicas";
 import SolicitarAlterarSenha from "../pages/alterar/senha/solicitar_alterar_senha/SolicitarAlterarSenha";
 import LayoutLogin from "../components/LayoutLogin";
 import LayoutPrivate from "../components/LayoutPrivate";
+import AlterarUsuario from "../pages/alterar/usuario/AlterarUsuario";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
                     {
                         path: '',
                         element: <Home />,
+                    },
+                    {
+                        path: 'alterar/usuario',
+                        element: <AlterarUsuario />,
                     }
                 ]
             }

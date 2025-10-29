@@ -1,0 +1,96 @@
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import styles from './AlterarUsuario.module.scss';
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import axios from 'axios';
+import ApiUrl from '../../../apiUrl';
+import { RiUserLine } from 'react-icons/ri';
+import { useEffect, useState } from 'react';
+
+const AlterarUsuario = () => {
+    const navigation = useNavigate();
+    const { setLoading } = useOutletContext();
+    const [usuario, setUsuario] = useState({});
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formValues = Object.fromEntries(formData);
+        console.log(formValues);
+
+        if (!formValues?.email) {
+            return alert('Todos os campos devem ser preenchidos, tente novamente.')
+        }
+
+        try {
+            setLoading(true);
+            const response = await axios.post(ApiUrl.urlSolicitarLinkSenha, formValues, { headers: { 'Content-Type': 'application/json' } });
+            console.log(response.data);
+            alert(response.data.retorno.mensagem);
+
+        } catch (error) {
+            console.log(error.response.data);
+            alert(error.response.data.retorno.mensagem);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const requestUsuario = async () => {
+        const token = localStorage.getItem('@pesabox_adm_token');
+        const requestOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
+        try {
+            setLoading(true);
+            const response = await axios.get('https://api-pesagem-chi.vercel.app/usuario', requestOptions);
+            setUsuario(response.data.registros[0] || {});
+        } catch (error) {
+            alert(error.response.data.retorno.mensagem);
+            console.log(error.response.data);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        requestUsuario();
+    }, []);
+
+    return (
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.area_form}>
+                <div className={styles.input_form}>
+                    <label>Nome</label>
+                    <div className={styles.area_input}>
+                        <input
+                            type='text'
+                            defaultValue={usuario?.nome}
+                            placeholder='Informe seu nome aqui'
+                            name='nome'
+                        />
+                        <RiUserLine />
+                    </div>
+                </div>
+                <div className={styles.input_form}>
+                    <label>E-mail</label>
+                    <div className={styles.area_input}>
+                        <input
+                            type='email'
+                            defaultValue={usuario?.email}
+                            placeholder='Informe seu email aqui'
+                            name='email'
+                        />
+                        <MdOutlineAlternateEmail />
+                    </div>
+                </div>
+                <button className={styles.conectar}>Salvar Alteração</button>
+                <a onClick={() => navigation(-1)}>Desativar usuário</a>
+            </div>
+        </form>
+    )
+}
+export default AlterarUsuario;

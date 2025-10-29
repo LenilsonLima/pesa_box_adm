@@ -6,13 +6,13 @@ import { RiUserSettingsLine } from 'react-icons/ri';
 
 const MenuComponent = ({ setOpenCloseMenu }) => {
     const navigation = useNavigate();
+
+
     const handleLogout = () => {
         localStorage.clear();
         navigation('/login');
     }
-    const dev = () => {
-        alert('Função em desenvolvimento.')
-    }
+
     return (
         <div className={styles.container_menu}>
             <div className={styles.body_menu}>
@@ -23,7 +23,10 @@ const MenuComponent = ({ setOpenCloseMenu }) => {
                             <MdOutlineClose onClick={() => setOpenCloseMenu(false)} />
                         </div>
                         <ul>
-                            <li onClick={dev}>
+                            <li onClick={() => {
+                                navigation('/alterar/usuario');
+                                setOpenCloseMenu(false);
+                            }}>
                                 <span>Perfil</span>
                                 <RiUserSettingsLine />
                             </li>
