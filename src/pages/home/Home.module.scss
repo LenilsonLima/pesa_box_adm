@@ -5,122 +5,128 @@
     gap: 20px;
     padding: 20px;
 
-    .area_table {
-        overflow: auto;
+    table {
+        border: solid 1px #ece8e8;
+        border-radius: 3px;
+        overflow: hidden;
+        background-color: #fff;
+        width: 100%;
 
-        table {
-            border: solid 1px #ece8e8;
-            border-radius: 3px;
-            overflow: hidden;
-            background-color: #fff;
-            width: 100%;
-            // min-width: 800px;
+        tbody {
+            tr {
+                transition: .3s ease-in-out;
 
-            tbody {
-                tr {
-                    transition: .3s ease-in-out;
+                &:hover {
+                    background-color: #f8f8f8;
+                }
 
-                    &:hover {
-                        background-color: #f8f8f8;
+                td {
+                    padding: 15px;
+                    border-bottom: solid 1px #ece8e8;
+
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+
+                        span {
+                            font-size: 15px;
+                        }
+
                     }
 
-                    td {
-                        padding: 15px;
-                        border-bottom: solid 1px #ece8e8;
+                    &:nth-child(1) {
+                        width: 100px;
 
                         div {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            gap: 5px;
+                            svg {
+                                color: #fff;
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 50%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-weight: 600;
+                                font-size: 15px;
+                                padding: 5px;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        div {
+                            align-items: flex-start;
 
                             span {
-                                font-size: 15px;
-                            }
-
-                        }
-
-                        &:nth-child(1) {
-                            width: 100px;
-
-                            div {
-                                svg {
-                                    color: #fff;
-                                    width: 30px;
-                                    height: 30px;
-                                    border-radius: 50%;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    font-weight: 600;
-                                    font-size: 15px;
-                                    padding: 5px;
+                                &:nth-child(2) {
+                                    font-size: 13px;
                                 }
                             }
+
                         }
+                    }
 
-                        &:nth-child(2) {
-                            div {
-                                align-items: flex-start;
+                    &:nth-child(3) {
+                        width: 100px;
 
-                                span {
-                                    &:nth-child(2) {
-                                        font-size: 13px;
-                                    }
-                                }
-
-                            }
+                        div {
+                            span {}
                         }
+                    }
 
-                        &:nth-child(3) {
-                            width: 100px;
+                    &:nth-child(4) {
+                        width: 100px;
 
-                            div {
-                                span {}
-                            }
-                        }
-
-                        &:nth-child(4) {
-                            width: 100px;
-
-                            div {
-                                svg {
-                                    font-size: 20px;
-                                    cursor: pointer;
-                                }
+                        div {
+                            svg {
+                                font-size: 20px;
+                                cursor: pointer;
                             }
                         }
                     }
                 }
+            }
 
-                @media (max-width: 800px) {
-                    tr {
-                        display: flex;
-                        flex-direction: column;
-                        border-bottom: solid 1px #ece8e8;
-                        justify-content: center;
-                        align-items: center;
-                        cursor: pointer;
+
+        }
+
+        @media (max-width: 700px) {
+            border: none;
+
+            tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                tr {
+                    display: flex;
+                    flex-direction: column;
+                    border: solid 1px #ece8e8;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 10px;
+                    border-radius: 3px;
+
+                    td {
                         padding: 10px;
+                        border: none;
+                        text-align: center;
 
-                        td {
-                            padding: 10px;
-                            border: none;
-                            text-align: center;
+                        div {
+                            gap: 15px;
 
-                            div {
-                                gap: 15px;
-
-                                span {
-                                    width: 100%;
-                                }
-
+                            span {
+                                width: 100%;
                             }
 
-                            &:nth-child(4) {
-                                display: none;
-                            }
+                        }
+
+                        &:nth-child(4) {
+                            display: none;
                         }
                     }
                 }

@@ -86,39 +86,37 @@ const Home = () => {
                     funcCancelar={() => setOpenCloseModalConfirmar(false)}
                 />
             }
-            <div className={styles.area_table}>
-                {usuarios?.length > 0 &&
-                    <table cellSpacing={0}>
-                        <tbody>
-                            {usuarios?.map((usuario, index) => (
-                                <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id} style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
-                                    <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <MdVerifiedUser style={{ backgroundColor: usuario?.status == 1 ? '#56a368ff' : '#cb2027' }} />
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.nome}</span>
-                                            <span style={{ color: usuario?.status == 1 ? 'gray' : '#cb2027' }}>{usuario?.email}</span>
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.status == 1 ? 'Ativo' : 'Inativo'}</span>
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <GoKebabHorizontal onClick={() => handleUsuarioClicado(usuario)} style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }} />
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                }
-            </div>
+            {usuarios?.length > 0 &&
+                <table cellSpacing={0}>
+                    <tbody>
+                        {usuarios?.map((usuario, index) => (
+                            <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id}>
+                                <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <MdVerifiedUser style={{ backgroundColor: usuario?.status == 1 ? '#56a368ff' : '#cb2027' }} />
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.nome}</span>
+                                        <span style={{ color: usuario?.status == 1 ? 'gray' : '#cb2027' }}>{usuario?.email}</span>
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.status == 1 ? 'Ativo' : 'Inativo'}</span>
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <GoKebabHorizontal onClick={() => handleUsuarioClicado(usuario)} style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }} />
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            }
         </div>
     )
 }
