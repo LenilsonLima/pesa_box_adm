@@ -91,7 +91,7 @@ const Home = () => {
                     <table cellSpacing={0}>
                         <tbody>
                             {usuarios?.map((usuario, index) => (
-                                <tr key={usuario?.id}>
+                                <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id} style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
                                     <td style={{ borderBottomWidth: index === (usuarios?.length - 1) ? 0 : 1 }}>
                                         <div>
                                             <MdVerifiedUser style={{ backgroundColor: usuario?.status == 1 ? '#56a368ff' : '#cb2027' }} />
