@@ -12,7 +12,6 @@ const SolicitarAlterarSenha = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formValues = Object.fromEntries(formData);
-        console.log(formValues);
 
         if (!formValues?.email) {
             return alert('Todos os campos devem ser preenchidos, tente novamente.')
@@ -21,7 +20,6 @@ const SolicitarAlterarSenha = () => {
         try {
             setLoading(true);
             const response = await axios.post(ApiUrl.urlSolicitarLinkSenha, formValues, { headers: { 'Content-Type': 'application/json' } });
-            console.log(response.data);
             alert(response.data.retorno.mensagem);
 
         } catch (error) {

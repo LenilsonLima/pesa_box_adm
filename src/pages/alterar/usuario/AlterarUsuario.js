@@ -15,18 +15,24 @@ const AlterarUsuario = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formValues = Object.fromEntries(formData);
-        console.log(formValues);
 
-        if (!formValues?.email) {
+        if (!formValues?.email || !formValues?.nome) {
             return alert('Todos os campos devem ser preenchidos, tente novamente.')
         }
 
+        const token = localStorage.getItem('@pesabox_adm_token');
+        const requestOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
         try {
             setLoading(true);
-            const response = await axios.post(ApiUrl.urlSolicitarLinkSenha, formValues, { headers: { 'Content-Type': 'application/json' } });
-            console.log(response.data);
+            const response = await axios.put('https://api-pesagem-chi.vercel.app/usuario', formValues, requestOptions);
             alert(response.data.retorno.mensagem);
-
+            navigation(-1);
         } catch (error) {
             console.log(error.response.data);
             alert(error.response.data.retorno.mensagem);
@@ -60,6 +66,8 @@ const AlterarUsuario = () => {
     useEffect(() => {
         requestUsuario();
     }, []);
+
+
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
