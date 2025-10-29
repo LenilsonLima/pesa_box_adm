@@ -13,8 +13,8 @@
         width: 100%;
         top: 0px;
         left: 0px;
-        background-color: #000;
-        opacity: .7;
+        background-color: rgba(#000, #000, #000, .7);
+        z-index: 9999;
     }
 
     .area_layout {
