@@ -1,0 +1,78 @@
+.container_modal_confirmar {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    background: rgba(34, 40, 52, .5);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    .fechar_modal_confirmar {
+        position: absolute;
+        background-color: transparent;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+    }
+
+    .area_modal_confirmar {
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        min-width: 400px;
+        position: relative;
+
+        .area_texto {
+            padding: 20px;
+            max-width: 90%;
+
+            p {
+                color: #777777;
+                font-size: 15px;
+            }
+        }
+
+        svg {
+            font-size: 15px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .dividir {
+            height: 1px;
+            background-color: #dddcdc;
+            width: 100%;
+        }
+
+        .area_btn {
+            padding: 20px;
+            display: flex;
+
+            button {
+                flex-grow: 1;
+                padding: 10px;
+                border: none;
+                cursor: pointer;
+                text-transform: capitalize;
+                font-weight: bold;
+                background-color: #cae4d8;
+                color: #35604b;
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        .area_modal_confirmar {
+            min-width: 100%;
+        }
+    }
+}

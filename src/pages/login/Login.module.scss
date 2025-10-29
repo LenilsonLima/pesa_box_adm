@@ -6,13 +6,6 @@
     min-width: 50%;
     height: 100%;
 
-    h2 {
-        font-size: 15px;
-        text-transform: uppercase;
-        padding: 20px;
-        border-bottom: solid 1px #f2f2f2;
-    }
-
     .area_form {
         display: flex;
         flex-direction: column;
@@ -32,10 +25,8 @@
                 align-items: center;
                 border-radius: 3px;
                 overflow: hidden;
-                padding-left: 10px;
                 padding-right: 10px;
                 height: 50px;
-                gap: 10px;
 
                 input {
                     width: 100%;
@@ -43,6 +34,7 @@
                     border: none;
                     height: 100%;
                     background-color: transparent;
+                    padding: 10px;
                 }
 
                 svg {
@@ -76,11 +68,11 @@
 
     a {
         color: #0788ee;
-        font-weight: 600;
         text-decoration: underline;
         cursor: pointer;
         transition: .2s ease-in-out;
-        text-align: right;
+        text-align: left;
+        font-size: 15px;
 
         &:hover {
             opacity: .7;

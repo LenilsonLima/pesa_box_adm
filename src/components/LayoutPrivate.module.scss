@@ -1,52 +1,49 @@
 .container_layout {
-    background-color: #f8f8f8;
-    min-height: 100vh;
+    background-color: #f8c65d;
+    height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 
+    .overlay {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background-color: #000;
+        opacity: .7;
+    }
+
     .area_layout {
         display: flex;
-        min-height: 500px;
         width: 100%;
-        max-width: 1000px;
+        height: 100%;
+        max-width: 1500px;
         border-radius: 3px;
-        overflow: hidden;
+        overflow: auto;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
 
-
-        .left {
-            background-color: #aae5ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .header {
+            border-bottom: solid 1px #f2f2f2;
             padding: 20px;
-            min-width: 50%;
-            flex-grow: 1;
-
-            img {
-                width: 200px;
-                height: 200px;
-            }
-
-            @media (max-width: 900px) {
-                display: none;
-            }
-        }
-
-        .rigth {
-            background-color: #fff;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 50%;
-            flex-grow: 1;
+            justify-content: space-between;
+            align-items: center;
 
-            .area_form {
-                display: flex;
-                flex-direction: column;
-                flex-grow: 1;
+            span {
+                font-size: 15px;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            svg {
+                font-size: 30px;
+                cursor: pointer;
             }
         }
     }

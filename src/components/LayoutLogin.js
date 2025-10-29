@@ -13,7 +13,8 @@ const LayoutLogin = () => {
                 :
                 <div className={styles.area_layout}>
                     <div className={styles.left}>
-                        <img src='https://cdn-icons-png.flaticon.com/512/15558/15558035.png' alt='Img logo' />
+                        {/* <img src='https://cdn-icons-png.flaticon.com/512/15558/15558035.png' alt='Img logo' /> */}
+                        <img src='https://cdn-icons-png.flaticon.com/512/18242/18242131.png' alt='Img logo' />
                     </div>
                     <div className={styles.rigth}>
                         <h2>{location.pathname === '/login' ?
