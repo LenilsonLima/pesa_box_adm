@@ -51,6 +51,7 @@ const AlterarUsuario = () => {
         } catch (error) {
             alert(error.response.data.retorno.mensagem);
             console.log(error.response.data);
+            navigation(-1);
         } finally {
             setLoading(false);
         }

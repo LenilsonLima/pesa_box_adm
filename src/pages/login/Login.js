@@ -26,7 +26,6 @@ const Login = () => {
             localStorage.setItem('@pesabox_adm_nome', response.data.registros.nome);
             localStorage.setItem('@pesabox_adm_token', response.data.registros.token);
             localStorage.setItem('@pesabox_adm_email', response.data.registros.email);
-            localStorage.setItem('@pesabox_adm_id', response.data.registros.id);
             navigation('/');
         } catch (error) {
             console.log(error.response.data);
