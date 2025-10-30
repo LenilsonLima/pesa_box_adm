@@ -1,4 +1,6 @@
 import ApiAxios from './apiAxios';
+
+// BUSCAR DADOS
 export const buscarDados = async (url, setDados, setLoading) => {
     setLoading(true);
     try {
@@ -12,6 +14,7 @@ export const buscarDados = async (url, setDados, setLoading) => {
     }
 }
 
+// REMOVER DADOS
 export const removerDados = async (url, setLoading, setOpenCloseModal, requestDados) => {
     setLoading(true);
     setOpenCloseModal(false);
@@ -26,6 +29,7 @@ export const removerDados = async (url, setLoading, setOpenCloseModal, requestDa
     }
 }
 
+// BLOQUEAR USUÁRIO
 export const bloquearUsuario = async (url, setLoading, setOpenCloseModal, requestDados) => {
     setLoading(true);
     setOpenCloseModal(false);
@@ -41,6 +45,7 @@ export const bloquearUsuario = async (url, setLoading, setOpenCloseModal, reques
     }
 }
 
+// ATUALIZAR USUÁRIO
 export const updateUsuario = async (url, body, setLoading) => {
     setLoading(true);
 
@@ -55,6 +60,7 @@ export const updateUsuario = async (url, body, setLoading) => {
     }
 }
 
+// ATUALIZAR SENHA
 export const updateSenha = async (url, body, setLoading, navigation) => {
     setLoading(true);
 
@@ -64,12 +70,13 @@ export const updateSenha = async (url, body, setLoading, navigation) => {
         navigation('/', { replace: true });
     } catch (error) {
         console.log(error.response.data);
-        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar senha, tente novamente.');
     } finally {
         setLoading(false);
     }
 }
 
+// CRIAR REGISTRO
 export const postDados = async (url, body, setLoading, navigation) => {
     setLoading(true);
 
@@ -79,7 +86,26 @@ export const postDados = async (url, body, setLoading, navigation) => {
         navigation(-1);
     } catch (error) {
         console.log(error.response.data);
-        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao criar registro, tente novamente.');
+    } finally {
+        setLoading(false);
+    }
+}
+
+// LOGIN
+export const loginPost = async (url, body, setLoading, navigation) => {
+    setLoading(true);
+
+    try {
+        const response = await ApiAxios.post(url, body);
+        localStorage.setItem('@pesabox_adm_nome', response.data.registros.nome);
+        localStorage.setItem('@pesabox_adm_token', response.data.registros.token);
+        localStorage.setItem('@pesabox_adm_email', response.data.registros.email);
+        localStorage.setItem('@pesabox_adm_id', response.data.registros.id);
+        navigation('/', { replace: true });
+    } catch (error) {
+        console.log(error.response.data);
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao realizar login, tente novamente.');
     } finally {
         setLoading(false);
     }

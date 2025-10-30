@@ -3,8 +3,7 @@ import styles from './Login.module.scss';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useState } from 'react';
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import ApiUrl from '../../apiUrl';
-import ApiAxios from '../../apiAxios';
+import { loginPost } from '../../funcoes';
 
 const Login = () => {
     const navigation = useNavigate();
@@ -20,19 +19,7 @@ const Login = () => {
             return alert('Todos os campos devem ser preenchidos, tente novamente.')
         }
 
-        try {
-            setLoading(true);
-            const response = await ApiAxios.post(ApiUrl.urlLogin, formValues);
-            localStorage.setItem('@pesabox_adm_nome', response.data.registros.nome);
-            localStorage.setItem('@pesabox_adm_token', response.data.registros.token);
-            localStorage.setItem('@pesabox_adm_email', response.data.registros.email);
-            localStorage.setItem('@pesabox_adm_id', response.data.registros.id);
-            navigation('/');
-        } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data.retorno.mensagem);
-            setLoading(false);
-        }
+        loginPost('/adm/login', formValues, setLoading, navigation);
     }
 
     return (
