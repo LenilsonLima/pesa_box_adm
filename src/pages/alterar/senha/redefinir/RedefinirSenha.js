@@ -3,6 +3,7 @@ import styles from './RedefinirSenha.module.scss';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import ApiAxios from '../../../../apiAxios';
+import axios from 'axios';
 
 const RedefinirSenha = () => {
     const navigation = useNavigate();
@@ -17,15 +18,11 @@ const RedefinirSenha = () => {
     const handleVerificaTokenSenha = async () => {
         try {
             setLoading(true);
-            await ApiAxios.get('usuario/token_senha', {
-                params: {
-                    token_senha: params?.token_senha
-                }
-            });
+            const response = await axios.get(`https://api-pesagem-chi.vercel.app/usuario/token_senha?token_senha=${params?.token_senha}`);
         } catch (error) {
             alert(error.response?.data.retorno.mensagem);
             localStorage.clear();
-            navigation('/', { replace: true });
+            navigation('/');
         } finally {
             setLoading(false);
         }
