@@ -1,8 +1,7 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import styles from './SolicitarAlterarSenha.module.scss';
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import axios from 'axios';
-import ApiUrl from '../../../../apiUrl';
+import { postDados } from '../../../../funcoes';
 
 const SolicitarAlterarSenha = () => {
     const navigation = useNavigate();
@@ -17,17 +16,7 @@ const SolicitarAlterarSenha = () => {
             return alert('Todos os campos devem ser preenchidos, tente novamente.')
         }
 
-        try {
-            setLoading(true);
-            const response = await axios.post(ApiUrl.urlSolicitarLinkSenha, formValues, { headers: { 'Content-Type': 'application/json' } });
-            alert(response.data.retorno.mensagem);
-
-        } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data.retorno.mensagem);
-        } finally {
-            setLoading(false);
-        }
+        postDados('/usuario/token_senha', formValues, setLoading, navigation);
     }
 
     return (

@@ -69,3 +69,18 @@ export const updateSenha = async (url, body, setLoading, navigation) => {
         setLoading(false);
     }
 }
+
+export const postDados = async (url, body, setLoading, navigation) => {
+    setLoading(true);
+
+    try {
+        const response = await ApiAxios.post(url, body);
+        alert(response?.data?.retorno.mensagem);
+        navigation(-1);
+    } catch (error) {
+        console.log(error.response.data);
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
+    } finally {
+        setLoading(false);
+    }
+}
