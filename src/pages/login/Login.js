@@ -3,8 +3,8 @@ import styles from './Login.module.scss';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useState } from 'react';
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import axios from 'axios';
 import ApiUrl from '../../apiUrl';
+import ApiAxios from '../../apiAxios';
 
 const Login = () => {
     const navigation = useNavigate();
@@ -22,7 +22,7 @@ const Login = () => {
 
         try {
             setLoading(true);
-            const response = await axios.post(ApiUrl.urlLogin, formValues, { headers: { 'Content-Type': 'application/json' } });
+            const response = await ApiAxios.post(ApiUrl.urlLogin, formValues);
             localStorage.setItem('@pesabox_adm_nome', response.data.registros.nome);
             localStorage.setItem('@pesabox_adm_token', response.data.registros.token);
             localStorage.setItem('@pesabox_adm_email', response.data.registros.email);
@@ -34,7 +34,7 @@ const Login = () => {
             setLoading(false);
         }
     }
-    
+
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.area_form}>
