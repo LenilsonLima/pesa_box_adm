@@ -25,7 +25,7 @@ ApiAxios.interceptors.response.use(
     async (error) => {
         if (error.response.data?.retorno.status === 401 || error.response.data?.retorno.status === 403) {
             localStorage.clear();
-            navigate("/login");
+            navigate("/login", { replace: true });
         }
         return Promise.reject(error);
     }
