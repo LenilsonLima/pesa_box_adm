@@ -3,7 +3,6 @@ import styles from './RedefinirSenha.module.scss';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import ApiAxios from '../../../../apiAxios';
-import axios from 'axios';
 
 const RedefinirSenha = () => {
     const navigation = useNavigate();
@@ -12,21 +11,19 @@ const RedefinirSenha = () => {
     const params = useParams();
 
     useEffect(() => {
+        const handleVerificaTokenSenha = async () => {
+            try {
+                setLoading(true);
+                const response = await ApiAxios.get(`usuario/token_senha?token_senha=${params?.token_senha}`);
+                setLoading(false);
+            } catch (error) {
+                alert(error.response?.data.retorno.mensagem);
+                localStorage.clear();
+                navigation('/', { replace: true });
+            }
+        }
         handleVerificaTokenSenha();
     }, []);
-
-    const handleVerificaTokenSenha = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(`https://api-pesagem-chi.vercel.app/usuario/token_senha?token_senha=${params?.token_senha}`);
-        } catch (error) {
-            alert(error.response?.data.retorno.mensagem);
-            localStorage.clear();
-            navigation('/');
-        } finally {
-            setLoading(false);
-        }
-    }
 
 
     const handleSubmit = async (e) => {
@@ -43,7 +40,7 @@ const RedefinirSenha = () => {
             setLoading(true);
             const response = await ApiAxios.put('/usuario/senha', formValues);
             alert(response.data.retorno.mensagem);
-
+            navigation('/', { replace: true });
         } catch (error) {
             console.log(error.response.data);
             alert(error.response.data.retorno.mensagem);

@@ -7,6 +7,16 @@
     align-items: center;
     padding: 20px;
 
+    .overlay {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background-color: #f2f2f2;
+        z-index: 9999;
+    }
+
     .area_layout {
         display: flex;
         min-height: 500px;
