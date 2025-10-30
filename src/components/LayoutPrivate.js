@@ -24,7 +24,7 @@ const LayoutPrivate = () => {
             }
             <div className={styles.area_layout}>
                 <div className={styles.header}>
-                    <span>Bem Vindo ao PesaBox</span>
+                    <span>{location.pathname === '/alterar/usuario' ? 'Alterar Usuário' : 'Bem Vindo ao PesaBox'}</span>
                     <IoMdMenu onClick={() => setOpenCloseMenu(true)} />
                 </div>
                 <div className={styles.area_form}>

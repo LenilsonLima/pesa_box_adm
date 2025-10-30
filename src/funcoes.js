@@ -1,45 +1,56 @@
-import axios from "axios";
-
-const token = localStorage.getItem('@pesabox_adm_token');
-
-export const removerDados = async (url, setRecarregar, setOpenCloseModal, requestDados) => {
-    setRecarregar(true);
-    setOpenCloseModal(false);
-    const requestOptions = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        },
-    };
-
+import ApiAxios from './apiAxios';
+export const buscarDados = async (url, setDados, setLoading) => {
+    setLoading(true);
     try {
-        const response = await axios.delete(url, requestOptions);
+        const response = await ApiAxios.get(url);
+        setDados(response.data.registros || []);
+    } catch (error) {
+        console.log(error.response.data);
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao buscar dados, tente novamente.');
+    } finally {
+        setLoading(false);
+    }
+}
+
+export const removerDados = async (url, setLoading, setOpenCloseModal, requestDados) => {
+    setLoading(true);
+    setOpenCloseModal(false);
+    try {
+        const response = await ApiAxios.delete(url);
         alert(response?.data?.retorno.mensagem);
-        console.log(response.data);
         requestDados();
     } catch (error) {
         console.log(error.response.data);
         alert(error.response?.data?.retorno.mensagem || 'Erro ao remover registro, tente novamente.');
-        setRecarregar(false);
+        setLoading(false);
     }
 }
 
-export const bloquearUsuario = async (url, body, setRecarregar, setOpenCloseModal, requestDados) => {
-    setRecarregar(true);
+export const bloquearUsuario = async (url, setLoading, setOpenCloseModal, requestDados) => {
+    setLoading(true);
     setOpenCloseModal(false);
 
-    const requestOptions = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        },
-    };
-
     try {
-        const response = await axios.put(url, body, requestOptions);
+        const response = await ApiAxios.put(url);
         alert(response?.data?.retorno.mensagem);
         requestDados();
     } catch (error) {
         console.log(error.response.data);
         alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
-        setRecarregar(false);
+        setLoading(false);
+    }
+}
+
+export const updateUsuario = async (url, body, setLoading) => {
+    setLoading(true);
+
+    try {
+        const response = await ApiAxios.put(url, body);
+        alert(response?.data?.retorno.mensagem);
+    } catch (error) {
+        console.log(error.response.data);
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
+    } finally {
+        setLoading(false);
     }
 }

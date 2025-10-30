@@ -1,12 +1,11 @@
 import styles from './Home.module.scss';
 import { GoKebabHorizontal } from 'react-icons/go';
 import { MdVerifiedUser } from 'react-icons/md';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import ModalAcoes from '../../components/ModalAcoes';
 import ModalConfirmarCancelar from '../../components/ModalConfirmarCancelar';
-import { bloquearUsuario, removerDados } from '../../funcoes';
+import { bloquearUsuario, buscarDados, removerDados } from '../../funcoes';
 
 const Home = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -21,25 +20,7 @@ const Home = () => {
         setOpenCloseModalAcoes(true);
     }
     const requestUsuarios = async () => {
-        const token = localStorage.getItem('@pesabox_adm_token');
-        const requestOptions = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
-        try {
-            setLoading(true);
-            setUsuarios([]);
-            const response = await axios.get('https://api-pesagem-chi.vercel.app/adm', requestOptions);
-            setUsuarios(response.data.registros);
-        } catch (error) {
-            alert(error.response.data.retorno.mensagem);
-            console.log(error.response.data);
-        } finally {
-            setLoading(false);
-        }
+        buscarDados('/adm', setUsuarios, setLoading);
     }
 
     useEffect(() => {
@@ -57,6 +38,23 @@ const Home = () => {
         setOpcaoSelecionadaModalConfirmar(2);
         setOpenCloseModalConfirmar(true);
         setOpenCloseModalAcoes(false);
+    }
+
+    const bloquear = () => {
+        bloquearUsuario(
+            `/usuario/block?id=${usuarioClicado?.id || 0}`,
+            setLoading,
+            setOpenCloseModalConfirmar,
+            requestUsuarios
+        );
+    }
+    const remover = () => {
+        removerDados(
+            `${'/adm'}?id=${usuarioClicado?.id}`,
+            setLoading,
+            setOpenCloseModalConfirmar,
+            requestUsuarios
+        );
     }
     return (
         <div className={styles.container_home}>
@@ -78,11 +76,7 @@ const Home = () => {
                             :
                             `Deseja remover o usuário "${usuarioClicado?.nome}"?`
                     }
-                    funcConfirmar={() => opcaoSelecionadaModalConfirmar === 1 ?
-                        bloquearUsuario(`https://api-pesagem-chi.vercel.app/adm`, { id: usuarioClicado?.id, status: usuarioClicado?.status === 0 ? 1 : 0 }, setLoading, setOpenCloseModalConfirmar, requestUsuarios)
-                        :
-                        removerDados(`https://api-pesagem-chi.vercel.app/adm?id=${usuarioClicado?.id}`, setLoading, setOpenCloseModalConfirmar, requestUsuarios)
-                    }
+                    funcConfirmar={() => opcaoSelecionadaModalConfirmar === 1 ? bloquear() : remover()}
                     funcCancelar={() => setOpenCloseModalConfirmar(false)}
                 />
             }

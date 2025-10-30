@@ -7,6 +7,7 @@ import SolicitarAlterarSenha from "../pages/alterar/senha/solicitar_alterar_senh
 import LayoutLogin from "../components/LayoutLogin";
 import LayoutPrivate from "../components/LayoutPrivate";
 import AlterarUsuario from "../pages/alterar/usuario/AlterarUsuario";
+import RedefinirSenha from "../pages/alterar/senha/redefinir/RedefinirSenha";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                     {
                         path: 'alterar/senha/solicitar',
                         element: <SolicitarAlterarSenha />,
+                    },
+                    {
+                        path: 'alterar/senha/redefinir/:token_senha',
+                        element: <RedefinirSenha />,
                     }
                 ]
             }

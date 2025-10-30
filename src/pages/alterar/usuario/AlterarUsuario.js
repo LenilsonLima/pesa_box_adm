@@ -1,15 +1,15 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import styles from './AlterarUsuario.module.scss';
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import axios from 'axios';
 import { RiUserLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import ModalConfirmarCancelar from '../../../components/ModalConfirmarCancelar';
+import { bloquearUsuario, buscarDados, updateUsuario } from '../../../funcoes';
 
 const AlterarUsuario = () => {
     const navigation = useNavigate();
     const { setLoading } = useOutletContext();
-    const [usuario, setUsuario] = useState({});
+    const [usuario, setUsuario] = useState([]);
     const [openCloseModalConfirmar, setOpenCloseModalConfirmar] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -21,47 +21,11 @@ const AlterarUsuario = () => {
             return alert('Todos os campos devem ser preenchidos, tente novamente.')
         }
 
-        const token = localStorage.getItem('@pesabox_adm_token');
-        const requestOptions = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
-        try {
-            setLoading(true);
-            const response = await axios.put('https://api-pesagem-chi.vercel.app/usuario', formValues, requestOptions);
-            alert(response.data.retorno.mensagem);
-            navigation(-1);
-        } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data.retorno.mensagem);
-        } finally {
-            setLoading(false);
-        }
+        updateUsuario('/usuario', formValues, setLoading);
     }
 
     const requestUsuario = async () => {
-        const token = localStorage.getItem('@pesabox_adm_token');
-        const requestOptions = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
-        try {
-            setLoading(true);
-            const response = await axios.get('https://api-pesagem-chi.vercel.app/usuario', requestOptions);
-            setUsuario(response.data.registros[0] || {});
-        } catch (error) {
-            alert(error.response.data.retorno.mensagem);
-            console.log(error.response.data);
-            navigation(-1);
-        } finally {
-            setLoading(false);
-        }
+        buscarDados('/usuario', setUsuario, setLoading);
     }
 
     useEffect(() => {
@@ -69,30 +33,11 @@ const AlterarUsuario = () => {
     }, []);
 
     const desativarUsuario = async () => {
-            setOpenCloseModalConfirmar(false);
-        const token = localStorage.getItem('@pesabox_adm_token');
-        const id = localStorage.getItem('@pesabox_adm_id');
-        const requestOptions = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
-        try {
-            setLoading(true);
-            const body = { id: id, status: 0 };
-            const response = await axios.put('https://api-pesagem-chi.vercel.app/adm', body, requestOptions);
-            alert(response.data.retorno.mensagem);
-            localStorage.clear();
-            navigation('/login');
-        } catch (error) {
-            alert(error.response.data.retorno.mensagem);
-            console.log(error.response.data);
-        } finally {
-            setLoading(false);
-        }
+        await bloquearUsuario('/usuario/block', setLoading, setOpenCloseModalConfirmar, requestUsuario);
+        localStorage.clear();
+        navigation('/login');
     }
+
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             {openCloseModalConfirmar &&
@@ -108,7 +53,7 @@ const AlterarUsuario = () => {
                     <div className={styles.area_input}>
                         <input
                             type='text'
-                            defaultValue={usuario?.nome}
+                            defaultValue={usuario[0]?.nome}
                             placeholder='Informe seu nome aqui'
                             name='nome'
                         />
@@ -120,7 +65,7 @@ const AlterarUsuario = () => {
                     <div className={styles.area_input}>
                         <input
                             type='email'
-                            defaultValue={usuario?.email}
+                            defaultValue={usuario[0]?.email}
                             placeholder='Informe seu email aqui'
                             name='email'
                         />

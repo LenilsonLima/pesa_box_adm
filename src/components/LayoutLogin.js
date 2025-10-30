@@ -24,7 +24,7 @@ const LayoutLogin = () => {
                                 ?
                                 'Alteração de senha'
                                 :
-                                'Bem Vindo ao PesaBox'
+                                'Redefinir Sua Senha'
                         }</h2>
                         <div className={styles.area_form}>
                             <Outlet context={{ setLoading }} />
