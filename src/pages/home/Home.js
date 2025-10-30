@@ -100,52 +100,52 @@ const Home = () => {
                     funcCancelar={() => setOpenCloseModalConfirmar(false)}
                 />
             }
-            {usuariosFiltrados?.length > 0 &&
-                <>
-                    <div className={styles.area_filtro}>
-                        <div className={styles.label_filtro}>
-                            <input type='text' placeholder='Nome ou e-mail' value={pesquisar} onChange={(e) => setPesquisar(e.target.value)} />
-                            <IoIosSearch />
-                        </div>
-                        <div className={styles.label_filtro}>
-                            <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                                <option value="3">- mostrar todos -</option>
-                                <option value="1">Ativo</option>
-                                <option value="0">Inativo</option>
-                            </select>
-                            <IoMdArrowDropdown />
-                        </div>
+            {usuarios?.length > 0 &&
+                <div className={styles.area_filtro}>
+                    <div className={styles.label_filtro}>
+                        <input type='text' placeholder='Nome ou e-mail' value={pesquisar} onChange={(e) => setPesquisar(e.target.value)} />
+                        <IoIosSearch />
                     </div>
-                    <table cellSpacing={0}>
-                        <tbody>
-                            {usuariosFiltrados?.map((usuario, index) => (
-                                <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id}>
-                                    <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <MdVerifiedUser style={{ backgroundColor: usuario?.status == 1 ? '#56a368ff' : '#cb2027' }} />
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.nome}</span>
-                                            <span style={{ color: usuario?.status == 1 ? 'gray' : '#cb2027' }}>{usuario?.email}</span>
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.status == 1 ? 'Ativo' : 'Inativo'}</span>
-                                        </div>
-                                    </td>
-                                    <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
-                                        <div>
-                                            <GoKebabHorizontal onClick={() => handleUsuarioClicado(usuario)} style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }} />
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </>
+                    <div className={styles.label_filtro}>
+                        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                            <option value="3">- mostrar todos -</option>
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
+                        </select>
+                        <IoMdArrowDropdown />
+                    </div>
+                </div>
+            }
+            {usuariosFiltrados?.length > 0 &&
+                <table cellSpacing={0}>
+                    <tbody>
+                        {usuariosFiltrados?.map((usuario, index) => (
+                            <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id}>
+                                <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <MdVerifiedUser style={{ backgroundColor: usuario?.status == 1 ? '#56a368ff' : '#cb2027' }} />
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.nome}</span>
+                                        <span style={{ color: usuario?.status == 1 ? 'gray' : '#cb2027' }}>{usuario?.email}</span>
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.status == 1 ? 'Ativo' : 'Inativo'}</span>
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
+                                    <div>
+                                        <GoKebabHorizontal onClick={() => handleUsuarioClicado(usuario)} style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }} />
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             }
         </div>
     )
