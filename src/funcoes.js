@@ -54,3 +54,17 @@ export const updateUsuario = async (url, body, setLoading) => {
         setLoading(false);
     }
 }
+
+export const updateSenha = async (url, body, setLoading) => {
+    setLoading(true);
+
+    try {
+        const response = await ApiAxios.put(url, body);
+        alert(response?.data?.retorno.mensagem);
+    } catch (error) {
+        console.log(error.response.data);
+        alert(error.response?.data?.retorno.mensagem || 'Erro ao alterar registro, tente novamente.');
+    } finally {
+        setLoading(false);
+    }
+}

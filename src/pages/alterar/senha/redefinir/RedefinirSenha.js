@@ -3,7 +3,7 @@ import styles from './RedefinirSenha.module.scss';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import ApiAxios from '../../../../apiAxios';
-
+import { updateSenha } from '../../../../funcoes';
 const RedefinirSenha = () => {
     const navigation = useNavigate();
     const { setLoading } = useOutletContext();
@@ -36,17 +36,7 @@ const RedefinirSenha = () => {
             return alert('Os campos senha e confirmar senha devem ser preenchidos e conter ao menos 4 caracteres.')
         }
 
-        try {
-            setLoading(true);
-            const response = await ApiAxios.put('/usuario/senha', formValues);
-            alert(response.data.retorno.mensagem);
-            navigation('/', { replace: true });
-        } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data.retorno.mensagem);
-        } finally {
-            setLoading(false);
-        }
+        updateSenha('/usuario/senha', formValues, setLoading, navigation);
     }
 
     return (
