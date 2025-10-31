@@ -138,6 +138,14 @@
                         width: 100px;
 
                         div {
+                            span {}
+                        }
+                    }
+
+                    &:nth-child(5) {
+                        width: 100px;
+
+                        div {
                             svg {
                                 font-size: 20px;
                                 cursor: pointer;
@@ -186,7 +194,7 @@
 
                         }
 
-                        &:nth-child(4) {
+                        &:nth-child(5) {
                             display: none;
                         }
                     }

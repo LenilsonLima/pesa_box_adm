@@ -139,6 +139,11 @@ const Home = () => {
                                 </td>
                                 <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
                                     <div>
+                                        <span style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }}>{usuario?.tipo == 1 ? 'ADM' : 'Apicultor'}</span>
+                                    </div>
+                                </td>
+                                <td style={{ borderBottomWidth: index === (usuariosFiltrados?.length - 1) ? 0 : 1 }}>
+                                    <div>
                                         <GoKebabHorizontal onClick={() => handleUsuarioClicado(usuario)} style={{ color: usuario?.status == 1 ? '#000' : '#cb2027' }} />
                                     </div>
                                 </td>
