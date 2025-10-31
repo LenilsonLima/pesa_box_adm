@@ -118,6 +118,15 @@ const Home = () => {
             }
             {usuariosFiltrados?.length > 0 &&
                 <table cellSpacing={0}>
+                    <thead>
+                        <tr>
+                            <th>##</th>
+                            <th style={{ textAlign: 'left' }}>Info</th>
+                            <th>Status</th>
+                            <th>Tipo</th>
+                            <th>##</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {usuariosFiltrados?.map((usuario, index) => (
                             <tr onClick={() => handleUsuarioClicado(usuario)} key={usuario?.id}>
